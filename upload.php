@@ -15,7 +15,7 @@ if (!empty($_FILES)) {
         $data['name'] = $_FILES['file']['name'];
         $data['type'] = $_FILES['file']['type'];
         $data['size'] = $_FILES['file']['size'];
-        save("images", $_data);
+        save("images", $data);
         echo "檔案上傳成功";
     } else {
         echo "檔案上傳失敗";
