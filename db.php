@@ -18,6 +18,7 @@ function all($table, $where = '')
 
 function find($table, $arg)
 {
+    global $pdo;
     // 初始化sql語法
     $sql = "SELECT * FROM `{$table}` WHERE";
     // 判斷WHERE條件是否為陣列
@@ -31,7 +32,9 @@ function find($table, $arg)
         // 如果搜尋ID就直接帶入sql語法WHERE後面
         $sql .= "`id`='{$arg}'";
     }
+    $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
+    return $row;
 }
 
 function save($table, $array)
