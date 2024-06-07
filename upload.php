@@ -48,7 +48,7 @@ if (!empty($_FILES)) {
     $images = all('images');
 
     foreach ($images as $image) {
-        echo "<div class='upload-img>'";
+        echo "<div class='upload-img'>";
         echo "<a class='pen' href='edit_image.php?id={$image['id']}'>";
         echo "<img src='./pen.png' style='width:15px;height:15px;'>";
         echo "</a>";
