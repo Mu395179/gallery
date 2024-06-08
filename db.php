@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Taipei');
 // 連接資料庫的變數
 $dsn = "mysql:host=localhost;charset=utf8;dbname=files";
 // 登入帳號密碼
@@ -143,3 +144,6 @@ function dd($array)
     print_r($array);
     echo "</pre>";
 }
+
+
+$date = new DateTimeImmutable();

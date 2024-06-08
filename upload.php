@@ -10,13 +10,17 @@ if (!empty($_FILES)) {
     echo "檔案類型" . $_FILES['file']['type'] . "<br>";
     echo "檔案大小" . $_FILES['file']['size'] . "<br>";
     echo "檔案暫存" . $_FILES['file']['tmp_name'] . "<br>";
-
-    if (move_uploaded_file($_FILES['file']['tmp_name'], "images/" . $_FILES['file']['name'])) {
-        $data['name'] = $_FILES['file']['name'];
+    // 提取副檔名
+    $fileExtension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    // 新檔名=當下年月日時分秒.副檔名
+    $newFileName = $date->format('Y'.'m'.'d'.'H'.'i'.'s') . '.' . $fileExtension;
+    if (move_uploaded_file($_FILES['file']['tmp_name'], "images/" . $newFileName)) {
+        // 陣列name 為新檔名
+        $data['name'] = $newFileName;
         $data['type'] = $_FILES['file']['type'];
         $data['size'] = $_FILES['file']['size'];
         save("images", $data);
-        echo "檔案上傳成功";
+        echo "檔案上傳成功，新檔名為：" . $newFileName;
     } else {
         echo "檔案上傳失敗";
     }
