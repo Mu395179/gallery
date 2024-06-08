@@ -5,21 +5,39 @@ include_once "db.php";
 // 3.搬移檔案
 // 4.顯示檔案列表
 
+// 檢查檔案是否有上傳成功
 if (!empty($_FILES)) {
     echo "檔案名稱" . $_FILES['file']['name'] . "<br>";
     echo "檔案類型" . $_FILES['file']['type'] . "<br>";
     echo "檔案大小" . $_FILES['file']['size'] . "<br>";
-    echo "檔案暫存" . $_FILES['file']['tmp_name'] . "<br>";
+
+    // 檢查文字資料是否有上傳成功
+    if (!empty($_POST['name']) && !empty($_POST['description'])) {
+        echo "作品名稱：" . $_POST['name'] . "<br>";
+        echo "描述：" . $_POST['description'] . "<br>";
+    } else {
+        echo "作品名稱和描述不能為空。<br>";
+        exit;
+    }
     // 提取副檔名
     $fileExtension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
     // 新檔名=當下年月日時分秒.副檔名
-    $newFileName = $date->format('Y'.'m'.'d'.'H'.'i'.'s') . '.' . $fileExtension;
+    $newFileName = $date->format('Y' . 'm' . 'd' . 'H' . 'i' . 's') . '.' . $fileExtension;
     if (move_uploaded_file($_FILES['file']['tmp_name'], "images/" . $newFileName)) {
         // 陣列name 為新檔名
-        $data['name'] = $newFileName;
-        $data['type'] = $_FILES['file']['type'];
-        $data['size'] = $_FILES['file']['size'];
+        $data = [
+            'name' => $newFileName,
+            'type' => $_FILES['file']['type'],
+            'size' => $_FILES['file']['size'],
+        ];
         save("images", $data);
+        $text = [
+            'original_name' => $_POST['name'],
+            'description' => $_POST['description'],
+        ];
+        save("text", $text);
+
+
         echo "檔案上傳成功，新檔名為：" . $newFileName;
     } else {
         echo "檔案上傳失敗";
@@ -43,6 +61,10 @@ if (!empty($_FILES)) {
 
     <form action="upload.php" method="post" enctype="multipart/form-data">
         <input type="file" name="file">
+        <label for="name">作品名稱:</label>
+        <input type="text" name="name">
+        <label for="information">描述:</label>
+        <textarea type="text" name="description" rows="10" cols="100"></textarea>
         <input type="submit" value="上傳">
 
     </form>
