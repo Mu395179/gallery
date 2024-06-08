@@ -5,7 +5,9 @@ include_once "db.php";
 
 $img = find('images', $_GET['id']);
 
-unlink('images/' . $img['name']);
+dd($img);
+
+unlink('images/' .$img['file_name']);
 
 del('images', $_GET['id']);
 
