@@ -62,6 +62,9 @@ if (!empty($_FILES)) {
         form {
             background-color: lightgray;
             border: 1px black solid;
+            padding-left: 30px;
+            padding-right:30px ;
+            padding-bottom: 20px;
         }
 
         .form-control {
@@ -73,7 +76,7 @@ if (!empty($_FILES)) {
 
 <body>
     <h1 class="header">檔案上傳</h1>
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="col-6">
                 <form action="upload.php" method="post" enctype="multipart/form-data">
