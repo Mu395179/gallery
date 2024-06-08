@@ -9,4 +9,6 @@ unlink('images/' . $img['name']);
 
 del('images', $_GET['id']);
 
+del('text', $_GET['id']);
+
 header("location:upload.php");

@@ -12,7 +12,7 @@ if (!empty($_FILES)) {
     echo "檔案大小" . $_FILES['file']['size'] . "<br>";
 
     // 檢查文字資料是否有上傳成功
-    if (!empty($_POST['name']) && !empty($_POST['description'])) {
+    if (!empty($_POST)) {
         echo "作品名稱：" . $_POST['name'] . "<br>";
         echo "描述：" . $_POST['description'] . "<br>";
     } else {
@@ -26,14 +26,16 @@ if (!empty($_FILES)) {
     if (move_uploaded_file($_FILES['file']['tmp_name'], "images/" . $newFileName)) {
         // 陣列name 為新檔名
         $data = [
-            'name' => $newFileName,
+            'file_name' => $newFileName,
             'type' => $_FILES['file']['type'],
             'size' => $_FILES['file']['size'],
         ];
         save("images", $data);
         $text = [
+            'file_name' => $newFileName,
             'original_name' => $_POST['name'],
             'description' => $_POST['description'],
+            'style' => $_POST['style'],
         ];
         save("text", $text);
 
@@ -63,15 +65,29 @@ if (!empty($_FILES)) {
         <input type="file" name="file">
         <label for="name">作品名稱:</label>
         <input type="text" name="name">
-        <label for="information">描述:</label>
+        <label for="description">描述:</label>
         <textarea type="text" name="description" rows="10" cols="100"></textarea>
+        <label for="style">直幅/橫幅</label>
+        <select type="text" name="style">
+            <?php
+            $styles = $pdo->query('select * from style')->fetchAll();
+            foreach ($styles as $style) {
+                echo "<option value='{$style['id']}'>{$style['ch_name']}</option>";
+            }
+            ?>
+
+        </select>
         <input type="submit" value="上傳">
 
     </form>
     <!-- 建立一個連結來查看上傳後的圖檔 -->
+
+    <h1>直幅</h1>
     <?php
 
-    $images = all('images');
+    $images = all('text',"WHERE style = 1");
+
+dd($images);
 
     foreach ($images as $image) {
         echo "<div class='upload-img'>";
@@ -79,9 +95,25 @@ if (!empty($_FILES)) {
         echo "<img src='./pen.png' style='width:15px;height:15px;'>";
         echo "</a>";
         echo "<a class='del' href='del_image.php?id={$image['id']}'>X</a>";
-        echo "<img src='images/{$image['name']}'>";
+        echo "<img src='images/{$image['file_name']}'>";
         echo "</div>";
     }
+    ?>
+    <h1>橫幅</h1>
+<?php
+    $images2 = all('text',"WHERE style = 2");
+
+    dd($images2);
+    
+        foreach ($images2 as $image2) {
+            echo "<div class='upload-img'>";
+            echo "<a class='pen' href='edit_image.php?id={$image2['id']}'>";
+            echo "<img src='./pen.png' style='width:15px;height:15px;'>";
+            echo "</a>";
+            echo "<a class='del' href='del_image.php?id={$image2['id']}'>X</a>";
+            echo "<img src='images/{$image2['file_name']}'>";
+            echo "</div>";
+        }
 
     ?>
 
