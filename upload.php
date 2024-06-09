@@ -74,12 +74,22 @@ if (!empty($_FILES)) {
             border: 1px solid black;
 
         }
+
+        .carousel-control-prev {
+            background-color: gray;
+            width: 30px;
+        }
+
+        .carousel-control-next {
+            background-color: gray;
+            width: 30px;
+        }
     </style>
 </head>
 
 <body>
     <h1 class="header">檔案上傳</h1>
-    <div class="container d-flex justify-content-center">
+    <div class="container ">
         <div class="row">
             <div class="col-6">
                 <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -133,66 +143,80 @@ if (!empty($_FILES)) {
             <!-- 建立一個連結來查看上傳後的圖檔 -->
             <?php
             $images = all('text');
+            ?>
+            <div class="col-6 mt-5">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php foreach ($images as $index => $image) { ?>
+                            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
 
-            foreach ($images as $image) {
-                ?>
-                
-                <div class="col-6">
-                    <div class="card" style="width:400px">
-                        <img class="card-img-top" <?= "src='images/{$image['file_name']}'" ?> alt="Card image"
-                            style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title"><?= "{$image['original_name']}" ?></h4>
-                            <p class="card-text"><?= "{$image['method']}" ?></p>
-                            <p class="card-text"><?= "{$image['purpose']}" ?></p>
-                            <p class="card-text"><?= "{$image['size']}" ?></p>
-                            <p class="card-text"><?= "{$image['description']}" ?></p>
-                            <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
-                        </div>
-                        <div class="row ">
-                            <div class="col-3"></div>
-                            <div class="col-4">
-                                <a <?= "href='edit_image.php?id={$image['id']}'" ?> class="btn btn-primary">編輯</a>
+                                <div class="card m-auto mt-3" style="width:400px">
+                                    <img class="card-img-top" <?= "src='images/{$image['file_name']}'" ?> alt="Card image"
+                                        style="width:100%">
+                                    <div class="card-body">
+                                        <h4 class="card-title"><?= "{$image['original_name']}" ?></h4>
+                                        <p class="card-text"><?= "{$image['method']}" ?></p>
+                                        <p class="card-text"><?= "{$image['purpose']}" ?></p>
+                                        <p class="card-text"><?= "{$image['size']}" ?></p>
+                                        <p class="card-text"><?= "{$image['description']}" ?></p>
+                                        <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3"></div>
+                                        <div class="col-4">
+                                            <a <?= "href='edit_image.php?id={$image['id']}'" ?>
+                                                class="btn btn-primary">編輯</a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a <?= "href='del_image.php?id={$image['id']}'" ?> class="btn btn-primary">刪除</a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="col-4">
-                                <a <?= "href='del_image.php?id={$image['id']}'" ?> class="btn btn-primary">刪除</a>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
-
         </div>
-    <?php } ?>
-    </div>
-    </div>
-    <h1>直幅</h1>
-    <?php
-    $images = all('text', "WHERE style = 1");
-    foreach ($images as $image) {
-        echo "<div class='upload-img'>";
-        echo "<a class='pen' href='edit_image.php?id={$image['id']}'>";
-        echo "<img src='./pen.png' style='width:15px;height:15px;'>";
-        echo "</a>";
-        echo "<a class='del' href='del_image.php?id={$image['id']}'>X</a>";
-        echo "<img src='images/{$image['file_name']}'>";
-        echo "</div>";
-    }
-    ?>
-    <h1>橫幅</h1>
-    <?php
-    $images2 = all('text', "WHERE style = 2");
-    foreach ($images2 as $image2) {
-        echo "<div class='upload-img'>";
-        echo "<a class='pen' href='edit_image.php?id={$image2['id']}'>";
-        echo "<img src='./pen.png' style='width:15px;height:15px;'>";
-        echo "</a>";
-        echo "<a class='del' href='del_image.php?id={$image2['id']}'>X</a>";
-        echo "<img src='images/{$image2['file_name']}'>";
-        echo "</div>";
-    }
 
-    ?>
+        <!-- <h1>直幅</h1>
+        <?php
+        $images = all('text', "WHERE style = 1");
+        foreach ($images as $image) {
+            echo "<div class='upload-img'>";
+            echo "<a class='pen' href='edit_image.php?id={$image['id']}'>";
+            echo "<img src='./pen.png' style='width:15px;height:15px;'>";
+            echo "</a>";
+            echo "<a class='del' href='del_image.php?id={$image['id']}'>X</a>";
+            echo "<img src='images/{$image['file_name']}'>";
+            echo "</div>";
+        }
+        ?>
+        <h1>橫幅</h1>
+        <?php
+        $images2 = all('text', "WHERE style = 2");
+        foreach ($images2 as $image2) {
+            echo "<div class='upload-img'>";
+            echo "<a class='pen' href='edit_image.php?id={$image2['id']}'>";
+            echo "<img src='./pen.png' style='width:15px;height:15px;'>";
+            echo "</a>";
+            echo "<a class='del' href='del_image.php?id={$image2['id']}'>X</a>";
+            echo "<img src='images/{$image2['file_name']}'>";
+            echo "</div>";
+        }
+
+        ?> -->
 
 
 
