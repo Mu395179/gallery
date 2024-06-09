@@ -35,6 +35,9 @@ if (!empty($_FILES)) {
             'original_name' => $_POST['name'],
             'description' => $_POST['description'],
             'style' => $_POST['style'],
+            'method' => $_POST['method'],
+            'purpose' => $_POST['purpose'],
+            'size' => $_POST['size'],
         ];
         save("text", $image);
         header("location:upload.php");
@@ -43,27 +46,77 @@ if (!empty($_FILES)) {
     }
 }
 ?>
+<h1 class="header">編輯檔案上傳</h1>
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <div class="col-6">
+            <form action="edit_image.php?id=<?= $_GET['id']; ?>" method="post" enctype="multipart/form-data">
+                <label class="form-label mt-2" for="name">上傳檔案:</label>
+                <input class="form-control " type="file" name="file">
+                <label class="form-label mt-2" for="name">作品名稱:</label>
+                <input class="form-control " type="text" name="name">
+                <label class="form-label mt-2" for="description">描述:</label>
+                <textarea class="form-control " type="text" name="description" rows="5" cols="100"></textarea>
+                <label class="form-label mt-2" for="style">直幅/橫幅:</label>
+                <select class="form-control " type="text" name="style">
+                    <?php
+                    $styles = $pdo->query('select * from style')->fetchAll();
+                    foreach ($styles as $style) {
+                        echo "<option value='{$style['id']}'>{$style['ch_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <label class="form-label mt-2" for="method">手法:</label>
+                <select class="form-control " type="text" name="method">
+                    <?php
+                    $methods = $pdo->query('select * from method')->fetchAll();
+                    foreach ($methods as $method) {
+                        echo "<option value='{$method['id']}'>{$method['ch_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <label class="form-label mt-2" for="purpose">分類:</label>
+                <select class="form-control " type="text" name="purpose">
+                    <?php
+                    $purposes = $pdo->query('select * from purpose')->fetchAll();
+                    foreach ($purposes as $purpose) {
+                        echo "<option value='{$purpose['id']}'>{$purpose['ch_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <label class="form-label mt-2" for="size">尺寸:</label>
+                <select class="form-control " type="text" name="size">
+                    <?php
+                    $sizes = $pdo->query('select * from size')->fetchAll();
+                    foreach ($sizes as $size) {
+                        echo "<option value='{$msize['id']}'>{$size['name']}</option>";
+                    }
+                    ?>
+                </select>
+                <input class="mt-5" type="submit" value="上傳">
 
-<form action="edit_image.php?id=<?= $_GET['id']; ?>" method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <label for="name">作品名稱:</label>
-    <input type="text" name="name">
-    <label for="description">描述:</label>
-    <textarea type="text" name="description" rows="10" cols="100"></textarea>
-    <label for="style">直幅/橫幅</label>
-    <select type="text" name="style">
-        <?php
-        $styles = $pdo->query('select * from style')->fetchAll();
-        foreach ($styles as $style) {
-            echo "<option value='{$style['id']}'>{$style['ch_name']}</option>";
-        }
-        ?>
-
-    </select>
-    <input type="submit" value="上傳">
-
-</form>
+            </form>
+        </div>
+    </div>
+</div>
 
 <?php
-echo "<img src='images/{$image['file_name']}'>";
-?>
+$images = all('text');
+
+foreach ($images as $image) {
+    ?>
+    <div class="col-6">
+
+        <div class="card" style="width:400px">
+            <img class="card-img-top" <?= "src='images/{$image['file_name']}'" ?> alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title"><?= "{$image['original_name']}" ?></h4>
+                <p class="card-text"><?= "{$image['method']}" ?></p>
+                <p class="card-text"><?= "{$image['purpose']}" ?></p>
+                <p class="card-text"><?= "{$image['size']}" ?></p>
+                <p class="card-text"><?= "{$image['description']}" ?></p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+<?php } ?>
