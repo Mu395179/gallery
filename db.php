@@ -17,6 +17,18 @@ function all($table, $where = '')
     return $rows;
 }
 
+function show($table)
+{
+
+    global $pdo;
+    $sql = "SELECT `text`.`id`,`file_name`, `original_name`,`description`,`purpose_ch_name`,`style_ch_name`,`size_name`,`method_ch_name` FROM `text` JOIN`purpose`ON`text`.`purpose` = `purpose`.`id` JOIN`style`ON`text`.`style` = `style`.`id` JOIN`size`ON`text`.`size` = `size`.`id` JOIN`method`ON`text`.`method` = `method`.`id`;";
+
+    $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+    return $rows;
+
+}
+
 function find($table, $arg)
 {
     global $pdo;

@@ -104,7 +104,7 @@ if (!empty($_FILES)) {
                         <?php
                         $styles = $pdo->query('select * from style')->fetchAll();
                         foreach ($styles as $style) {
-                            echo "<option value='{$style['id']}'>{$style['ch_name']}</option>";
+                            echo "<option value='{$style['id']}'>{$style['style_ch_name']}</option>";
                         }
                         ?>
                     </select>
@@ -113,7 +113,7 @@ if (!empty($_FILES)) {
                         <?php
                         $methods = $pdo->query('select * from method')->fetchAll();
                         foreach ($methods as $method) {
-                            echo "<option value='{$method['id']}'>{$method['ch_name']}</option>";
+                            echo "<option value='{$method['id']}'>{$method['method_ch_name']}</option>";
                         }
                         ?>
                     </select>
@@ -122,7 +122,7 @@ if (!empty($_FILES)) {
                         <?php
                         $purposes = $pdo->query('select * from purpose')->fetchAll();
                         foreach ($purposes as $purpose) {
-                            echo "<option value='{$purpose['id']}'>{$purpose['ch_name']}</option>";
+                            echo "<option value='{$purpose['id']}'>{$purpose['purpose_ch_name']}</option>";
                         }
                         ?>
                     </select>
@@ -131,7 +131,7 @@ if (!empty($_FILES)) {
                         <?php
                         $sizes = $pdo->query('select * from size')->fetchAll();
                         foreach ($sizes as $size) {
-                            echo "<option value='{$msize['id']}'>{$size['name']}</option>";
+                            echo "<option value='{$size['id']}'>{$size['size_name']}</option>";
                         }
                         ?>
                     </select>
@@ -142,7 +142,7 @@ if (!empty($_FILES)) {
 
             <!-- 建立一個連結來查看上傳後的圖檔 -->
             <?php
-            $images = all('text');
+            $images = show('text');
             ?>
             <div class="col-6 mt-5">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -155,9 +155,10 @@ if (!empty($_FILES)) {
                                         style="width:100%">
                                     <div class="card-body">
                                         <h4 class="card-title"><?= "{$image['original_name']}" ?></h4>
-                                        <p class="card-text"><?= "{$image['method']}" ?></p>
-                                        <p class="card-text"><?= "{$image['purpose']}" ?></p>
-                                        <p class="card-text"><?= "{$image['size']}" ?></p>
+                                        <p class="card-text"><?= "{$image['purpose_ch_name']}" ?></p>
+                                        <p class="card-text"><?= "{$image['style_ch_name']}" ?></p>
+                                        <p class="card-text"><?= "{$image['size_name']}" ?></p>
+                                        <p class="card-text"><?= "{$image['method_ch_name']}" ?></p>
                                         <p class="card-text"><?= "{$image['description']}" ?></p>
                                         <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
                                     </div>

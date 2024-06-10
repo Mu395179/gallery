@@ -10,6 +10,7 @@
 <body>
     <a href="upload.php">表單檔案上傳</a>
     <a href="manage.php">檔案管理</a>
+    <a href="test.php">test</a>
 
 </body>
 
