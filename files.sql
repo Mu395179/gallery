@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-06-09 09:03:05
+-- 產生時間： 2024-06-10 07:17:29
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -43,14 +43,14 @@ CREATE TABLE `images` (
 CREATE TABLE `method` (
   `id` int(10) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `ch_name` varchar(10) NOT NULL
+  `method_ch_name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `method`
 --
 
-INSERT INTO `method` (`id`, `name`, `ch_name`) VALUES
+INSERT INTO `method` (`id`, `name`, `method_ch_name`) VALUES
 (1, 'Oil_paint', '油彩'),
 (2, 'Watercolor', '水彩'),
 (3, 'Acrylic_Paint', '丙烯畫');
@@ -64,14 +64,14 @@ INSERT INTO `method` (`id`, `name`, `ch_name`) VALUES
 CREATE TABLE `purpose` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `ch_name` varchar(20) NOT NULL
+  `purpose_ch_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `purpose`
 --
 
-INSERT INTO `purpose` (`id`, `name`, `ch_name`) VALUES
+INSERT INTO `purpose` (`id`, `name`, `purpose_ch_name`) VALUES
 (1, 'landscape', '風景'),
 (2, 'still_life', '靜物'),
 (3, 'portrait', '肖像'),
@@ -85,14 +85,14 @@ INSERT INTO `purpose` (`id`, `name`, `ch_name`) VALUES
 
 CREATE TABLE `size` (
   `id` int(11) NOT NULL,
-  `name` varchar(10) NOT NULL
+  `size_name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `size`
 --
 
-INSERT INTO `size` (`id`, `name`) VALUES
+INSERT INTO `size` (`id`, `size_name`) VALUES
 (1, '12F'),
 (2, '10F'),
 (3, '8P'),
@@ -107,14 +107,14 @@ INSERT INTO `size` (`id`, `name`) VALUES
 CREATE TABLE `style` (
   `id` int(11) NOT NULL,
   `name` varchar(10) NOT NULL,
-  `ch_name` varchar(10) NOT NULL
+  `style_ch_name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `style`
 --
 
-INSERT INTO `style` (`id`, `name`, `ch_name`) VALUES
+INSERT INTO `style` (`id`, `name`, `style_ch_name`) VALUES
 (1, 'vertical', '直幅'),
 (2, 'horizontal', '橫幅');
 
