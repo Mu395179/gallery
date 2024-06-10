@@ -12,14 +12,14 @@ include_once "db.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-body{
-    height: 100vh;
-    background-color: lightyellow;
-}
-.nav-link{
-    color: white;
-}
+        body {
+            height: 100vh;
+            background-color: lightyellow;
+        }
 
+        .nav-link {
+            color: white;
+        }
     </style>
 </head>
 
@@ -61,8 +61,82 @@ body{
             <div class="col-4 mt-5">
                 <a href="upload.php" class="btn btn-primary">上傳</a>
             </div>
+            <div class="col-4 mt-5">
+                <a href="test.php" class="btn btn-primary">test</a>
+            </div>
         </div>
-    
+
+        <div class="row">
+            <form action="index.php" method="post">
+                <label class="form-label mt-2" for="style">直幅/橫幅:</label>
+                <select class="form-control " type="text" name="style">
+                    <?php
+                    $styles = $pdo->query('select * from style')->fetchAll();
+                    foreach ($styles as $style) {
+                        echo "<option value='{$style['id']}'>{$style['style_ch_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <label class="form-label mt-2" for="method">手法:</label>
+                <select class="form-control " type="text" name="method">
+                    <?php
+                    $methods = $pdo->query('select * from method')->fetchAll();
+                    foreach ($methods as $method) {
+                        echo "<option value='{$method['id']}'>{$method['method_ch_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <label class="form-label mt-2" for="purpose">分類:</label>
+                <select class="form-control " type="text" name="purpose">
+                    <?php
+                    $purposes = $pdo->query('select * from purpose')->fetchAll();
+                    foreach ($purposes as $purpose) {
+                        echo "<option value='{$purpose['id']}'>{$purpose['purpose_ch_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <label class="form-label mt-2" for="size">尺寸:</label>
+                <select class="form-control " type="text" name="size">
+                    <?php
+                    $sizes = $pdo->query('select * from size')->fetchAll();
+                    foreach ($sizes as $size) {
+                        echo "<option value='{$size['id']}'>{$size['size_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <input class="btn btn-primary" type="submit" value="搜尋">
+                <?php
+                if (!empty($_POST)) {
+                    $texts = [
+                        'style' => $_POST['style'],
+                        'method' => $_POST['method'],
+                        'purpose' => $_POST['purpose'],
+                        'size' => $_POST['size'],
+                    ];
+
+                    $tmp = array2sql($texts);
+                    $sql = join(" AND ", $tmp); // 將條件用 AND 連接
+                    $results = search('text', $sql);
+                    // dd($results);
+                ?>
+                 <div class="row mt-5">
+                 <p class="h1">搜尋結果</p>
+                <?php
+                    foreach ($results as $result) {
+                        echo "<div class='text-center col-2'>";
+                        echo "<img src='images/{$result['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
+                        echo "</div>";
+                        // echo "<div class='text-center col-2'>";
+                        // echo "<img src='images/{{$result['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
+                        // echo "</div>";
+                    }
+                } else {
+                    echo "";
+                }
+                ?>
+        </div>
+
+
         <div class="row mt-5">
             <p class="h1">風景</p>
             <?php
