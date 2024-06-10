@@ -16,13 +16,17 @@ body{
     height: 100vh;
     background-color: lightyellow;
 }
+.nav-item{
+    color: white;
+}
+
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
-            <ul class="nav">
+            <ul class="nav bg-dark">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">線上畫廊</a>
                 </li>
@@ -65,7 +69,7 @@ body{
             $images = all('text', "WHERE purpose = 1");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
@@ -75,7 +79,7 @@ body{
             $images = all('text', "WHERE purpose = 2");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
@@ -85,7 +89,7 @@ body{
             $images = all('text', "WHERE purpose = 3");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
@@ -95,7 +99,7 @@ body{
             $images = all('text', "WHERE purpose = 4");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
