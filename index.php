@@ -69,7 +69,7 @@ body{
             $images = all('text', "WHERE purpose = 1");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
@@ -79,7 +79,7 @@ body{
             $images = all('text', "WHERE purpose = 2");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
@@ -89,7 +89,7 @@ body{
             $images = all('text', "WHERE purpose = 3");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
@@ -99,7 +99,7 @@ body{
             $images = all('text', "WHERE purpose = 4");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
-                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-5 border-dark shadow p-3 mb-5 bg-body rounded'>";
+                echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</div>";
             } ?>
         </div>
