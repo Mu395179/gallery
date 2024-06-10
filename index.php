@@ -16,7 +16,7 @@ body{
     height: 100vh;
     background-color: lightyellow;
 }
-.nav-item{
+.nav-link{
     color: white;
 }
 
