@@ -1,8 +1,7 @@
 <?php
 include_once "db.php";
 
-$img = find('text', $_GET['id']);
-dd($img);
+$img = joinfind('text', $_GET['id']);
 
 // echo "<img src='images/{$img['file_name']}'>";
 ?>
@@ -24,23 +23,37 @@ dd($img);
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-12">作品名稱</div>
+    <div class="row">
+            <ul class="nav bg-dark">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">線上畫廊</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">關於</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">贊助</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">聯絡我們</a>
+                </li>
+            </ul>
         </div>
-        <div class="row">
-            <div class="col-2">作品簡介
-
-                <?php
-                foreach ($img as $index => $image) { ?>
-                    <h4 class="card-title"><?= "{$image['original_name']}" ?></h4>
-                    <p class="card-text"><?= "{$image['purpose_ch_name']}" ?></p>
-                    <p class="card-text"><?= "{$image['style_ch_name']}" ?></p>
-                    <p class="card-text"><?= "{$image['size_name']}" ?></p>
-                    <p class="card-text"><?= "{$image['method_ch_name']}" ?></p>
-                    <p class="card-text"><?= "{$image['description']}" ?></p>
-                <?php } ?>
+        <div class="row mt-5">
+            <div class="col-12">
+            <h4 class="card-title"><?= "{$img['original_name']}" ?></h4>
             </div>
-            <div class="col-6"><?php echo "<img class='img-thumbnail' src='images/{$image['file_name']}'>"; ?></div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-2">
+                    <p class="card-text mt-5"><?= "{$img['purpose_ch_name']}" ?></p>
+                    <p class="card-text mt-5"><?= "{$img['style_ch_name']}" ?></p>
+                    <p class="card-text mt-5"><?= "{$img['size_name']}" ?></p>
+                    <p class="card-text mt-5"><?= "{$img['method_ch_name']}" ?></p>
+                    <p class="card-text mt-5"><?= "{$img['description']}" ?></p>
+
+            </div>
+            <div class="col-6"><?php echo "<img class='img-thumbnail' src='images/{$img['file_name']}'>"; ?></div>
             <div class="col-4">作者介紹</div>
 
 

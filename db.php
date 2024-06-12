@@ -30,6 +30,7 @@ function search($table, $arg = '')
     return $rows;
 }
 
+
 function show($table)
 {
 
@@ -47,6 +48,27 @@ function find($table, $arg)
     global $pdo;
     // 初始化sql語法
     $sql = "SELECT * FROM `{$table}` WHERE";
+    // 判斷WHERE條件是否為陣列
+    if (is_array($arg)) {
+        // 如果是陣列，則把sql陣列foreach後存進$tmp
+        $tmp = array2sql($arg);
+        // 把 $tmp 暫存的條件陣列轉成字串用&&串起來接在WHERE後面
+        $sql .= join("&&", $tmp);
+
+    } else {
+        // 如果搜尋ID就直接帶入sql語法WHERE後面
+        $sql .= "`id`='{$arg}'";
+    }
+    $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
+}
+
+function joinfind($table, $arg)
+{
+    global $pdo;
+    // 初始化sql語法
+    $sql = "SELECT `text`.`id`,`file_name`, `original_name`,`description`,`purpose_ch_name`,`style_ch_name`,`size_name`,`method_ch_name` FROM `text` JOIN`purpose`ON`text`.`purpose` = `purpose`.`id` JOIN`style`ON`text`.`style` = `style`.`id` JOIN`size`ON`text`.`size` = `size`.`id` JOIN`method`ON`text`.`method` = `method`.`id`;";
     // 判斷WHERE條件是否為陣列
     if (is_array($arg)) {
         // 如果是陣列，則把sql陣列foreach後存進$tmp
