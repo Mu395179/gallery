@@ -131,6 +131,7 @@ include_once "db.php";
                         $tmp = array2sql($texts);
                         $sql = join(" AND ", $tmp); // 將條件用 AND 連接
                         $results = search('text', $sql);
+                        dd($results);
                         ?>
                         <div class="row mt-5">
                             <p class="h1">搜尋結果</p>
