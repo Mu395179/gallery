@@ -39,6 +39,11 @@ $img = joinfind('text', $_GET['id']);
                 </li>
             </ul>
         </div>
+        <div class="row">
+            <div class="col-4 mt-5">
+                <a href="index.php" class="btn btn-primary">回首頁</a>
+            </div>
+        </div>
         <div class="row mt-5">
             <div class="col-12">
             <h4 class="card-title"><?= "{$img['original_name']}" ?></h4>
