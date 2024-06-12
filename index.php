@@ -80,7 +80,7 @@ include_once "db.php";
                 </select>
                 <label class="form-label mt-2" for="method">手法:</label>
                 <select class="form-control " type="text" name="method">
-                
+
                     <?php
                     $methods = $pdo->query('select * from method')->fetchAll();
                     echo "<option value=''></option>";
@@ -112,8 +112,8 @@ include_once "db.php";
                 <input class="btn btn-primary" type="submit" value="搜尋">
                 <?php
                 if (!empty($_POST)) {
+                    dd($_POST);
                     $texts = [];
-            
                     if (!empty($_POST['style'])) {
                         $texts['style'] = $_POST['style'];
                     }
@@ -126,23 +126,25 @@ include_once "db.php";
                     if (!empty($_POST['size'])) {
                         $texts['size'] = $_POST['size'];
                     }
-            
+
                     if (!empty($texts)) {
                         $tmp = array2sql($texts);
                         $sql = join(" AND ", $tmp); // 將條件用 AND 連接
                         $results = search('text', $sql);
-                    ?>
-                    <div class="row mt-5">
-                        <p class="h1">搜尋結果</p>
-                        <?php
-                        foreach ($results as $result) {
-                            echo "<div class='text-center col-2'>";
-                            echo "<img src='images/{$result['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
-                            echo "</div>";
-                        }
                         ?>
-                    </div>
-                    <?php
+                        <div class="row mt-5">
+                            <p class="h1">搜尋結果</p>
+                            <?php
+                            foreach ($results as $result) {
+                                echo "<div class='text-center col-2'>";
+                                echo "<a href='show.php?id={$result['id']}'>";
+                                echo "<img src='images/{$result['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
+                                echo "</a>";
+                                echo "</div>";
+                            }
+                            ?>
+                        </div>
+                        <?php
                     } else {
                         echo "<p class='text-danger'>請至少選擇一個篩選條件。</p>";
                     }
@@ -156,8 +158,11 @@ include_once "db.php";
             <?php
             $images = all('text', "WHERE purpose = 1");
             foreach ($images as $image) {
+
                 echo "<div class='text-center col-2'>";
+                echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
+                echo "</a>";
                 echo "</div>";
             } ?>
         </div>
@@ -167,7 +172,9 @@ include_once "db.php";
             $images = all('text', "WHERE purpose = 2");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
+                echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
+                echo "</a>";
                 echo "</div>";
             } ?>
         </div>
@@ -177,7 +184,9 @@ include_once "db.php";
             $images = all('text', "WHERE purpose = 3");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
+                echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
+                echo "</a>";
                 echo "</div>";
             } ?>
         </div>
@@ -187,7 +196,9 @@ include_once "db.php";
             $images = all('text', "WHERE purpose = 4");
             foreach ($images as $image) {
                 echo "<div class='text-center col-2'>";
+                echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
+                echo "</a>";
                 echo "</div>";
             } ?>
         </div>
