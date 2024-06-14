@@ -20,6 +20,10 @@ include_once "db.php";
         .nav-link {
             color: white;
         }
+
+        .col-select {
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -68,47 +72,55 @@ include_once "db.php";
 
         <div class="row">
             <form action="index.php" method="post">
-                <label class="form-label mt-2" for="style">直幅/橫幅:</label>
-                <select class="form-control " type="text" name="style">
-                    <?php
-                    echo "<option value=''></option>";
-                    $styles = $pdo->query('select * from style')->fetchAll();
-                    foreach ($styles as $style) {
-                        echo "<option value='{$style['id']}'>{$style['style_ch_name']}</option>";
-                    }
-                    ?>
-                </select>
-                <label class="form-label mt-2" for="method">手法:</label>
-                <select class="form-control " type="text" name="method">
+                <div class="col-2 col-select">
+                    <label class="form-label mt-2" for="style">直幅/橫幅:</label>
+                    <select class="form-control " type="text" name="style">
+                        <?php
+                        echo "<option value=''></option>";
+                        $styles = $pdo->query('select * from style')->fetchAll();
+                        foreach ($styles as $style) {
+                            echo "<option value='{$style['id']}'>{$style['style_ch_name']}</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-2 col-select">
+                    <label class="form-label mt-2" for="method">手法:</label>
+                    <select class="form-control " type="text" name="method">
 
-                    <?php
-                    $methods = $pdo->query('select * from method')->fetchAll();
-                    echo "<option value=''></option>";
-                    foreach ($methods as $method) {
-                        echo "<option value='{$method['id']}'>{$method['method_ch_name']}</option>";
-                    }
-                    ?>
-                </select>
-                <label class="form-label mt-2" for="purpose">分類:</label>
-                <select class="form-control " type="text" name="purpose">
-                    <?php
-                    $purposes = $pdo->query('select * from purpose')->fetchAll();
-                    echo "<option value=''></option>";
-                    foreach ($purposes as $purpose) {
-                        echo "<option value='{$purpose['id']}'>{$purpose['purpose_ch_name']}</option>";
-                    }
-                    ?>
-                </select>
-                <label class="form-label mt-2" for="size">尺寸:</label>
-                <select class="form-control " type="text" name="size">
-                    <?php
-                    $sizes = $pdo->query('select * from size')->fetchAll();
-                    echo "<option value=''></option>";
-                    foreach ($sizes as $size) {
-                        echo "<option value='{$size['id']}'>{$size['size_name']}</option>";
-                    }
-                    ?>
-                </select>
+                        <?php
+                        $methods = $pdo->query('select * from method')->fetchAll();
+                        echo "<option value=''></option>";
+                        foreach ($methods as $method) {
+                            echo "<option value='{$method['id']}'>{$method['method_ch_name']}</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-2 col-select">
+                    <label class="form-label mt-2" for="purpose">分類:</label>
+                    <select class="form-control " type="text" name="purpose">
+                        <?php
+                        $purposes = $pdo->query('select * from purpose')->fetchAll();
+                        echo "<option value=''></option>";
+                        foreach ($purposes as $purpose) {
+                            echo "<option value='{$purpose['id']}'>{$purpose['purpose_ch_name']}</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-2 col-select">
+                    <label class="form-label mt-2" for="size">尺寸:</label>
+                    <select class="form-control " type="text" name="size">
+                        <?php
+                        $sizes = $pdo->query('select * from size')->fetchAll();
+                        echo "<option value=''></option>";
+                        foreach ($sizes as $size) {
+                            echo "<option value='{$size['id']}'>{$size['size_name']}</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
                 <input class="btn btn-primary" type="submit" value="搜尋">
                 <?php
                 if (!empty($_POST)) {
