@@ -67,7 +67,7 @@ function joinfind($table, $arg)
 {
     global $pdo;
     // 初始化sql語法
-    $sql = "SELECT `text`.`id`,`file_name`, `original_name`,`description`,`purpose_ch_name`,`style_ch_name`,`size_name`,`method_ch_name` FROM `text` JOIN`purpose`ON`text`.`purpose` = `purpose`.`id` JOIN`style`ON`text`.`style` = `style`.`id` JOIN`size`ON`text`.`size` = `size`.`id` JOIN`method`ON`text`.`method` = `method`.`id`;";
+    $sql = "SELECT `text`.`file_name`, `text`.`original_name`, `text`.`description`, `purpose`.`purpose_ch_name`, `style`.`style_ch_name`, `size`.`size_name`, `method`.`method_ch_name` FROM `text` JOIN `purpose` ON `text`.`purpose` = `purpose`.`id` JOIN `style` ON `text`.`style` = `style`.`id` JOIN `size` ON `text`.`size` = `size`.`id` JOIN `method` ON `text`.`method` = `method`.`id` WHERE `text`.";
     // 判斷WHERE條件是否為陣列
     if (is_array($arg)) {
         // 如果是陣列，則把sql陣列foreach後存進$tmp
@@ -77,7 +77,7 @@ function joinfind($table, $arg)
 
     } else {
         // 如果搜尋ID就直接帶入sql語法WHERE後面
-        $sql .= "`id`='{$arg}'";
+        $sql .= "`id` = {$arg}";
     }
     $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 

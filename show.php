@@ -2,7 +2,7 @@
 include_once "db.php";
 
 $img = joinfind('text', $_GET['id']);
-
+dd($img);
 // echo "<img src='images/{$img['file_name']}'>";
 ?>
 
