@@ -124,7 +124,7 @@ include_once "db.php";
                 <input class="btn btn-primary" type="submit" value="搜尋">
                 <?php
                 if (!empty($_POST)) {
-                    dd($_POST);
+
                     $texts = [];
                     if (!empty($_POST['style'])) {
                         $texts['style'] = $_POST['style'];
@@ -143,7 +143,7 @@ include_once "db.php";
                         $tmp = array2sql($texts);
                         $sql = join(" AND ", $tmp); // 將條件用 AND 連接
                         $results = search('text', $sql);
-                        dd($results);
+
                         ?>
                         <div class="row mt-5">
                             <p class="h1">搜尋結果</p>
@@ -167,48 +167,49 @@ include_once "db.php";
 
 
         <div class="row mt-5">
+            <div class="col-3">
             <p class="h1">風景</p>
             <?php
             $images = all('text', "WHERE purpose = 1");
             foreach ($images as $image) {
 
-                echo "<div class='text-center col-2'>";
+                echo "<div class='text-center'>";
                 echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</a>";
                 echo "</div>";
             } ?>
         </div>
-        <div class="row mt-5">
+        <div class="col-3">
             <p class="h1">靜物</p>
             <?php
             $images = all('text', "WHERE purpose = 2");
             foreach ($images as $image) {
-                echo "<div class='text-center col-2'>";
+                echo "<div class='text-center'>";
                 echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</a>";
                 echo "</div>";
             } ?>
         </div>
-        <div class="row mt-5">
+        <div class="col-3">
             <p class="h1">肖像</p>
             <?php
             $images = all('text', "WHERE purpose = 3");
             foreach ($images as $image) {
-                echo "<div class='text-center col-2'>";
+                echo "<div class='text-center'>";
                 echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</a>";
                 echo "</div>";
             } ?>
         </div>
-        <div class="row mt-5 pb-5">
+        <div class="col-3">
             <p class="h1">寵物</p>
             <?php
             $images = all('text', "WHERE purpose = 4");
             foreach ($images as $image) {
-                echo "<div class='text-center col-2'>";
+                echo "<div class='text-center'>";
                 echo "<a href='show.php?id={$image['id']}'>";
                 echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0 shadow p-0 mb-5 bg-body rounded'>";
                 echo "</a>";

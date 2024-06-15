@@ -25,7 +25,6 @@ function search($table, $arg = '')
     $sql = "SELECT * FROM `{$table}` WHERE {$arg}";
     // 用通用陣列的方式呼叫sql，並且是所有資料
     $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    echo $sql;
     // function 結束函式，並將函式所得出的結果回傳給$rows
     return $rows;
 }
