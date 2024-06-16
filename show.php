@@ -25,10 +25,16 @@ $img = joinfind('text', $_GET['id']);
 
         .print {
             margin-top: 15%;
-            margin-left: 25%;
+            margin-left: 32%;
             width: 30%;
-            /* position: relative; */
+        }
 
+        .col-6 {
+            display: none;
+        }
+
+        .col-6.active {
+            display: block;
         }
     </style>
 </head>
@@ -75,16 +81,69 @@ $img = joinfind('text', $_GET['id']);
             <div class="col-3">作者介紹</div>
 
             <div class="row">
+                <div class="col-3">
+
+                </div>
+                <div class="col-6 mt-5" id="wall01">
+                    <img class="img-fluid wall" src="wall/wall04.jpg" alt="">
+                    <?php echo "<img class='print' src='images/{$img['file_name']}'>"; ?>
+                </div>
+                <div class="col-6 mt-5" id="wall02">
+                    <img class="img-fluid wall" src="wall/wall02.jpg" alt="">
+                    <?php echo "<img class='print' src='images/{$img['file_name']}'>"; ?>
+                </div>
+                <div class="col-6 mt-5" id="wall03">
+                    <img class="img-fluid wall x-100" src="wall/wall06.jpg" alt="">
+                    <?php echo "<img class='print' src='images/{$img['file_name']}'>"; ?>
+                </div>
+                <div class="col-3">
+                    <!-- Buttons to switch images -->
+                    <button id="button1">Wall 01</button>
+                    <button id="button2">Wall 02</button>
+                    <button id="button3">Wall 03</button>
+                </div>
+            </div>
+
+            <!-- <div class="row">
                 <div class="col-2"></div>
                 <div class="col-7 mt-5"><img class="img-fluid wall" src="wall/wall02.jpg" alt="">
                     <?php echo "<img class='print' src='images/{$img['file_name']}'>"; ?>
                 </div>
                 <div class="col-3"></div>
-            </div>
+            </div> -->
 
 
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Initially show the second wall
+            $("#wall02").addClass("active").fadeIn();
+
+            // Handle button clicks
+            $("#button1").click(function() {
+                $(".col-6.active").fadeOut(function() {
+                    $(this).removeClass("active");
+                    $("#wall01").fadeIn().addClass("active");
+                });
+            });
+
+            $("#button2").click(function() {
+                $(".col-6.active").fadeOut(function() {
+                    $(this).removeClass("active");
+                    $("#wall02").fadeIn().addClass("active");
+                });
+            });
+
+            $("#button3").click(function() {
+                $(".col-6.active").fadeOut(function() {
+                    $(this).removeClass("active");
+                    $("#wall03").fadeIn().addClass("active");
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
