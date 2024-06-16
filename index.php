@@ -83,7 +83,7 @@ include_once "db.php";
                 <a href="upload.php" class="btn btn-primary">上傳</a>
             </div>
             <div class="col-4 mt-5">
-                <a href="test.php" class="btn btn-primary">test</a>
+                <a href="test1.php" class="btn btn-primary">test1</a>
             </div>
         </div>
 
