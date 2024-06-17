@@ -12,9 +12,10 @@ include_once "db.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .container{
+        .container {
             padding-bottom: 10em;
         }
+
         body {
             height: 100vh;
             background-color: lightyellow;
@@ -32,13 +33,15 @@ include_once "db.php";
             display: flex;
             flex-direction: row;
         }
-        .right{
+
+        .right {
             padding-top: 20px;
             padding-bottom: 10px;
             border-left: 1px solid gray;
             text-align: end;
         }
-        .right>p{
+
+        .right>p {
             margin-bottom: 0;
         }
     </style>
@@ -185,7 +188,7 @@ include_once "db.php";
 
         <div class="row mt-5">
             <div class="col-3">
-                <p class="h1">風景</p>
+                <!-- <p class="h1">風景</p> -->
                 <?php
                 $images = joinfindall('text', "`purpose` = 1");
                 foreach ($images as $image) {
@@ -196,34 +199,7 @@ include_once "db.php";
                     echo "</a>";
                     echo "</div>";
                     ?>
-                
-                <div class="card-body">
-                    <div class="card-row">
-                        <div class="col-6 left"> </div>
-                        <div class="col-6 right">
-                            <p class="card-text"><?= "{$image['purpose_ch_name']}" ?></p>
-                            <p class="card-text"><?= "{$image['style_ch_name']}" ?></p>
-                            <p class="card-text"><?= "{$image['size_name']}" ?></p>
-                            <p class="card-text"><?= "{$image['method_ch_name']}" ?></p>
-                        </div>
-                    </div>
-                    <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
-                </div>
-           <?php } ?>
-            </div>
-            <div class="col-3">
-                <p class="h1">靜物</p>
-                <?php
-                $images = joinfindall('text', "`purpose` = 2");
- 
-                foreach ($images as $image) {
-                    echo "<div class='text-center'>";
-                    echo "<a href='show.php?id={$image['id']}'>";
-                    echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0'>";
-                    echo "</a>";
-                    echo "</div>";
-                    ?>
-                
+
                     <div class="card-body">
                         <div class="card-row">
                             <div class="col-6 left"> </div>
@@ -236,10 +212,37 @@ include_once "db.php";
                         </div>
                         <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
                     </div>
-               <?php } ?>
-                </div>
+                <?php } ?>
+            </div>
             <div class="col-3">
-                <p class="h1">肖像</p>
+                <!-- <p class="h1">靜物</p> -->
+                <?php
+                $images = joinfindall('text', "`purpose` = 2");
+
+                foreach ($images as $image) {
+                    echo "<div class='text-center'>";
+                    echo "<a href='show.php?id={$image['id']}'>";
+                    echo "<img src='images/{$image['file_name']}' class='card-img-top border border-dark border-5 rounded-0'>";
+                    echo "</a>";
+                    echo "</div>";
+                    ?>
+
+                    <div class="card-body">
+                        <div class="card-row">
+                            <div class="col-6 left"> </div>
+                            <div class="col-6 right">
+                                <p class="card-text"><?= "{$image['purpose_ch_name']}" ?></p>
+                                <p class="card-text"><?= "{$image['style_ch_name']}" ?></p>
+                                <p class="card-text"><?= "{$image['size_name']}" ?></p>
+                                <p class="card-text"><?= "{$image['method_ch_name']}" ?></p>
+                            </div>
+                        </div>
+                        <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
+                    </div>
+                <?php } ?>
+            </div>
+            <div class="col-3">
+                <!-- <p class="h1">肖像</p> -->
                 <?php
                 $images = joinfindall('text', "`purpose` = 3");
                 foreach ($images as $image) {
@@ -249,7 +252,7 @@ include_once "db.php";
                     echo "</a>";
                     echo "</div>";
                     ?>
-                
+
                     <div class="card-body">
                         <div class="card-row">
                             <div class="col-6 left"> </div>
@@ -262,10 +265,10 @@ include_once "db.php";
                         </div>
                         <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
                     </div>
-               <?php } ?>
-                </div>
+                <?php } ?>
+            </div>
             <div class="col-3">
-                <p class="h1">寵物</p>
+                <!-- <p class="h1">寵物</p> -->
                 <?php
                 $images = joinfindall('text', "`purpose` = 4");
                 foreach ($images as $image) {
@@ -275,7 +278,7 @@ include_once "db.php";
                     echo "</a>";
                     echo "</div>";
                     ?>
-                
+
                     <div class="card-body">
                         <div class="card-row">
                             <div class="col-6 left"> </div>
@@ -288,7 +291,7 @@ include_once "db.php";
                         </div>
                         <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
                     </div>
-               <?php } ?>
+                <?php } ?>
             </div>
         </div>
 </body>
