@@ -59,7 +59,7 @@ class DB
     public function joinfindall(...$arg)
 {
     // 初始化sql語法
-    $sql = "SELECT `text`.`id`,`file_name`, `original_name`,`description`,`purpose_ch_name`,`style_ch_name`,`size_name`,`method_ch_name` FROM `text` JOIN`purpose`ON`text`.`purpose` = `purpose`.`id` JOIN`style`ON`text`.`style` = `style`.`id` JOIN`size`ON`text`.`size` = `size`.`id` JOIN`method`ON`text`.`method` = `method`.`id` WHERE ";
+    $sql = "SELECT `$this->table`.`id`,`file_name`, `original_name`,`description`,`purpose_ch_name`,`style_ch_name`,`size_name`,`method_ch_name` FROM `text` JOIN`purpose`ON`text`.`purpose` = `purpose`.`id` JOIN`style`ON`text`.`style` = `style`.`id` JOIN`size`ON`text`.`size` = `size`.`id` JOIN`method`ON`text`.`method` = `method`.`id` WHERE ";
     $sql .="{$arg}";
     
 
@@ -155,6 +155,13 @@ function dd($array)
     echo "<pre>";
     print_r($array);
     echo "</pre>";
+}
+
+function q($sql)
+{
+    $dsn = "mysql:host=localhost;charset=utf8;dbname=student";
+    $pdo = new PDO($dsn, 'root', '');
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
 $Text = new DB('text');
