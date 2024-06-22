@@ -55,6 +55,17 @@ class DB
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // 撈出資料庫join後的資料
+    public function joinfindall(...$arg)
+{
+    // 初始化sql語法
+    $sql = "SELECT `text`.`id`,`file_name`, `original_name`,`description`,`purpose_ch_name`,`style_ch_name`,`size_name`,`method_ch_name` FROM `text` JOIN`purpose`ON`text`.`purpose` = `purpose`.`id` JOIN`style`ON`text`.`style` = `style`.`id` JOIN`size`ON`text`.`size` = `size`.`id` JOIN`method`ON`text`.`method` = `method`.`id` WHERE ";
+    $sql .="{$arg}";
+    
+
+    return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+
     // 呼叫搜尋資料庫回傳單一資料
     public function find($arg)
     {
@@ -118,6 +129,8 @@ class DB
          return $this->pdo->exec($sql);
     }
 
+
+
     // 陣列foreach暫存tmp 函式
     public function a2s($array)
     {
@@ -144,6 +157,7 @@ function dd($array)
     echo "</pre>";
 }
 
-
+$Text = new DB('text');
+$Images = new DB('images');
 
 
