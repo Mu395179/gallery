@@ -159,7 +159,7 @@ function dd($array)
 
 function q($sql)
 {
-    $dsn = "mysql:host=localhost;charset=utf8;dbname=student";
+    $dsn = "mysql:host=localhost;charset=utf8;dbname=files";
     $pdo = new PDO($dsn, 'root', '');
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
