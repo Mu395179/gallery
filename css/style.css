@@ -9,7 +9,7 @@
     --title-color: hsl(0, 0%, 95%);
     --text-color: hsl(0, 0%, 70%);
     --text-color-light: hsl(0, 0%, 60%);
-    --body-color: hsl(0, 0, 0);
+    --body-color: hsl(0, 0%, 0%);
     --container-color: hsl(0, 0, 8%);
 
     /* font and typography */
@@ -62,5 +62,124 @@ html {
 body,
 button,
 input {
-    font-family: body;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+
+}
+body{
+    background-color: var(--body-color);
+
+}
+button,
+input{
+    outline: none;
+    border: none;
+
+}
+h1,h2,h3,h4{
+    color: var(--title-color);
+    font-family: var(--second-font);
+    font-weight: var(--font-semi-bold);
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+
+}
+/* reusable css classes */
+.container{
+    max-width: 1120px;
+    margin-inline: 1.5rem;
+
+}
+.grid{
+    display: grid;
+    gap: 1.5rem;
+}
+.section{
+    padding-block: 5rem;
+
+}
+.section__title{
+    text-align: center;
+    font-size: var(--h1-font-size);
+    margin-bottom: 1.5rem;
+
+}
+.main{
+    overflow:hidden;/* FOR animatoin scrollReveal*/
+}
+
+/* header & nav */
+.header{
+    position: fixed;
+    width: 100%;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+}
+.nav{
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo{
+    color: var(--title-color);
+    font-family: var(--second-font);
+    font-weight: var(--font-semi-bold);
+}
+
+.nav__toggle,
+.nav__close{
+    display: flex;
+    font-size: 1.25rem;
+    color: var(--title-color);
+    cursor: pointer;
+}
+/* navigation for mobile devices */
+@media screen and (max-width: 1023px){
+    .nav__menu{
+        position: fixed;
+        top: -100%;
+        left: 0;
+        background: hsla(0, 0%, 0%, .3);
+        width: 100%;
+        padding-block: 4rem;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        transition: top .4s;
+
+    }
+    
+}
+.nav__list{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+}
+.nav__link{
+    color: var(--title-color);
+    font-family: var(--second-font);
+    font-weight: var(--font-medium);
+}
+.nav__close{
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+/* show menu */
+.show-menu{
+    top: 0 ;
 }
