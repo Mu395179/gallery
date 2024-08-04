@@ -86,12 +86,12 @@ include_once "db.php";
             <div class="col-4 mt-5">
                 <a href="upload.php" class="btn btn-primary">上傳</a>
             </div>
-            <div class="col-4 mt-5">
+            <!-- <div class="col-4 mt-5">
                 <a href="test1.php" class="btn btn-primary">test1</a>
             </div>
             <div class="col-4 mt-5">
                 <a href="api\get_text.php" class="btn btn-primary">get_text.php</a>
-            </div>
+            </div> -->
         </div>
 
         <div class="row">
